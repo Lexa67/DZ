@@ -1,3 +1,5 @@
+puts "Сколько примеров ты хочешь решить?"
+user = gets.to_i
 i = 0
 point = 0
 loop  do
@@ -34,9 +36,9 @@ loop do
 		end
 	end
 end
-	if i == 20
+	if i == user
 		puts "Молодец!"
-		puts "Правильных ответов #{point}"
+		puts "Правильных ответов #{point} из #{user}"
 		break
 	end
 end
