@@ -1,9 +1,15 @@
-require_relative 'game'
-require_relative 'result_printer'
+current_path = "./" + File.dirname(__FILE__)
+
+require current_path + "/game.rb"
+require current_path + "/result_printer.rb"
+require current_path + "/word_reader.rb"
 
 printer = ResultPrinter.new
 
-slovo = ARGV[0]
+reader = WordReader.new
+
+@y = reader.read_from_file(current_path + '/Data/words.txt')
+slovo = reader.read_from_file(current_path + '/Data/words.txt')
 
 game = Game.new(slovo)
 

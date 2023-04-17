@@ -1,4 +1,27 @@
 class ResultPrinter
+
+	def initialize
+		@status_image = []
+
+		current_path = File.dirname(__FILE__)
+		counter = 0
+
+		while counter <= 7 do
+			file_name = current_path +"/Image/#{counter}.txt"
+
+			if File.exist?(file_name)
+				f = File.new(file_name)
+				@status_image << f.read
+				f.close
+				else
+				@status_image << "\n[ Изображение не найдено ]\n"				
+			end
+
+			counter += 1
+
+		end 			
+	end
+
 	def print_status(game)
 		cls
 			puts "\nСлово: #{get_word_for_print(game.letters, game.good_letters)}"
@@ -8,7 +31,7 @@ class ResultPrinter
 			print_viselitsa(game.errors)
 
 			if game.errors >= 7
-				puts 'Вы проиграли :('
+				puts "Вы проиграли :(. Загаданное слово #{game.letters.join}"
 			else
 		  		if (game.letters - game.good_letters).empty?
 		    		puts "Поздравляем, вы выиграли!\n\n"
@@ -31,127 +54,12 @@ class ResultPrinter
 
 	  return result
 	end
-
-	def print_viselitsa(errors)
-       case errors
-	    when 0
-	      puts '
-	          _______
-	          |/
-	          |
-	          |
-	          |
-	          |
-	          |
-	          |
-	          |
-	        __|________
-	        |         |
-	        '
-	    when 1
-	      puts '
-	        _______
-	        |/
-	        |     ( )
-	        |
-	        |
-	        |
-	        |
-	        |
-	        |
-	      __|________
-	      |         |
-	      '
-	    when 2
-	      puts '
-	        _______
-	        |/
-	        |     ( )
-	        |      |
-	        |
-	        |
-	        |
-	        |
-	        |
-	      __|________
-	      |         |
-	      '
-	    when 3
-	      puts '
-	        _______
-	        |/
-	        |     ( )
-	        |      |_
-	        |        \\
-	        |
-	        |
-	        |
-	        |
-	      __|________
-	      |         |
-	      '
-	    when 4
-	      puts '
-	        _______
-	        |/
-	        |     ( )
-	        |     _|_
-	        |    /   \\
-	        |
-	        |
-	        |
-	        |
-	      __|________
-	      |         |
-	      '
-	    when 5
-	      puts '
-	        _______
-	        |/
-	        |     ( )
-	        |     _|_
-	        |    / | \\
-	        |      |
-	        |
-	        |
-	        |
-	      __|________
-	      |         |
-	      '
-
-	    when 6
-	      puts '
-	        _______
-	        |/
-	        |     ( )
-	        |     _|_
-	        |    / | \\
-	        |      |
-	        |     / \\
-	        |    /   \\
-	        |
-	      __|________
-	      |         |
-	      '
-	    when 7
-	      puts '
-	        _______
-	        |/     |
-	        |     (_)
-	        |     _|_
-	        |    / | \\
-	        |      |
-	        |     / \\
-	        |    /   \\
-	        |
-	      __|________
-	      |         |
-	      '
-	    end
-	  end
-
+	
 	def cls
-	  system('cls')
+		  system('cls')
 	end
-
+	
+	def print_viselitsa(errors)
+		 puts @status_image[errors]
+	end
 end
