@@ -8,13 +8,15 @@ class ResultPrinter
 
 		while counter <= 7 do
 			file_name = current_path +"/Image/#{counter}.txt"
-
-			if File.exist?(file_name)
+begin
+			#if File.exist?(file_name)
 				f = File.new(file_name)
 				@status_image << f.read
 				f.close
-				else
-				@status_image << "\n[ Изображение не найдено ]\n"				
+				#else
+				#@status_image << "\n[ Изображение не найдено ]\n"				
+			rescue Errno::ENOENT
+				puts "виселица не загрузилась)))"
 			end
 
 			counter += 1

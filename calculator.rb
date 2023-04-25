@@ -1,10 +1,10 @@
 puts "Первoе число:"
 
-first = STDIN.gets.to_i
+first = STDIN.gets.to_f  #Если число с плавающей точкой, делить на 0 можно!!!
 
 puts "Второе число:"
 
-second = STDIN.gets.to_i
+second = STDIN.gets.to_f
 
 puts "Выберите операцию (+ - / *)"
 
@@ -27,23 +27,11 @@ operation = STDIN.gets.chomp
 # 		puts "Error. Нет такой операции"
 # 	end
 
-# case operation
-# when "+"
-# 	puts first + second
-# when "-"
-# 	puts first - second
-# when "/"
-# 	puts first / second
-# when "*"
-# 	puts first * second
-# else
-# 	puts "Error"
-# end
 
 third = first.send(operation, second)
 puts third
-rescue ZeroDivisionError => error
-	puts "На ноль делить нельзя :" + "(" + error.message + ")"
+# rescue ZeroDivisionError => error
+# 	puts "На ноль делить нельзя :" + "(" + error.message + ")"
 
 rescue NoMethodError => error
 	puts "Такого действия не существует " + "(" + error.message + ")"
